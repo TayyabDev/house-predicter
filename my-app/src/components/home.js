@@ -10,23 +10,19 @@ class Home extends React.Component {
     return (
     	<div>
     		<div className="header">
-        		<mark>Household Income Predictor</mark>
+        		<h2 class="text">Household Income Predictor</h2>
       		</div>
 
       		<br></br>
 
       		<form>
-	      		<label>Enter your Income (Before Tax):</label>
+	      		<label>Search For Area You Are Interested In:</label>
 	      		<br></br>
-	      		<input type="text" placeholder="Household Income"/>
-	      		<br></br>
-	      		<br></br>
-	      		<label>Enter your preferred city of residence:</label>
-	      		<br></br>
-	      		<input type="text" placeholder="City"/>
+            <br></br>
+	      		<input type="text" placeholder="Enter City"/>
 	      		<br></br>
 	      		<br></br>
-            <input type="submit"/>
+            <input id="submit" type="submit"/>
             <br></br>
             <br></br>
 

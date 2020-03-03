@@ -9,11 +9,14 @@
 
 }*/
 
+body {
+	background-color: #1F2833;
+}
+
 .header {
-  padding: 40px;
+  padding: 20px;
   text-align: center;
-  background: rgba(112, 229, 255, 0.23);
-  color: white;
+  background: #0B0C10;
   font-size: 30px;
   margin-top: -18px;
   width: 100%;
@@ -28,18 +31,19 @@ form {
 	font-size: 22px;
 	line-height: 30px;
 
-	color: #EE4E4E;
+	color: #45A29E;
 }
 
-mark { 
-	color: #004EAA;
-	background-color: white;
+.text { 
+	color: #66FCF1;
 
-	font-family: 'Bree Serif', serif;
+	font-family: 'Lato', sans-serif;
 	font-size: 30px;
 	font-style: normal;
 	font-weight: bold;
 	font-size: 40px;
+	text-decoration: 1px solid #FFFFFF;
+
 }
 
 .map {
@@ -48,5 +52,33 @@ mark {
 	width: 1118;
     height: 478;
 
+
+}
+
+input {
+	font-family: 'Ruda', sans-serif;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 17px;
+	line-height: 30px;
+	padding-left: 10px;
+}
+
+#submit {
+	width: 186px;
+	height: 54px;
+
+	background: #397C7C;
+
+	color: white;
+	font-family: 'Lato', sans-serif;
+	font-size: 18px;
+	font-style: normal;
+	font-weight: normal;
+	text-decoration: 1px solid #FFFFFF;
+
+	border-radius: 8px;
+
+	text-align: center;
 
 }
