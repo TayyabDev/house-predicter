@@ -8,7 +8,7 @@ class Home extends React.Component {
     const { title, subtitle } = this.props;
 
     return (
-    	<div>
+    	<form>
     		<div className="header">
         		<h2 class="text">Household Income Predictor</h2>
       		</div>
@@ -27,7 +27,7 @@ class Home extends React.Component {
             <br></br>
 
 	      	</form>
-      	</div>
+      	</form>
 
     );
   }
