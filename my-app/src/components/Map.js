@@ -45,6 +45,7 @@ class MapComponent extends React.Component{
     return (
       <div>
         <Map latitude={this.state.latitude} longitude={this.state.longitude}/> 
+
       </div>
     );
   }
@@ -62,63 +63,54 @@ class Map extends React.Component {
       viewport:  {
         width: 1118,
         height: 478,
-        latitude: props.latitude,
-        longitude: props.longitude,
+        latitude: 39.8283,
+        longitude: -98.5795,
         zoom: 4
         }
       }
       this.mapRef = React.createRef();
-
       this.handleViewportChange = this.handleViewportChange.bind(this);
   }
 
   handleViewportChange = (viewport) => {
+    console.log("update")
     this.setState({
       viewport: { ...this.state.viewport, ...viewport }
     })
   }
 
   componentDidMount(){
-    console.log(this.mapRef); // => log includes getMap() function
     const map = this.mapRef.current.getMap()
-    map.addControl(
-      new MapboxGeocoder({
+
+    const geocoder = new MapboxGeocoder({
       accessToken: 'pk.eyJ1IjoidGF5eWFiZGV2IiwiYSI6ImNrN2M0NW13ODBoMnIzbHFoYmR1Y2ZjdDYifQ.jNx0hMccnFqRtzvck4PLJQ',
       mapboxgl: map
-      })
-      );
-      
-      
-  }
+    })
 
-  componentDidUpdate(prevProps) {
-    console.log(this.props)
-    console.log(prevProps)
-    // Typical usage (don't forget to compare props):
-    if ((this.props.latitude != prevProps.latitude || this.props.longitude != prevProps.longitude)) {
-      console.log("hre")
-      this.handleViewportChange(prevProps)
-    } else {
-      console.log("not")
-    }
+    map.addControl(geocoder);
+    
   }
 
   render(){
+    console.log("Rendering again: marker : " + this.state.marker )
     return(
+        <div>
         <ReactMapGL
           {...this.state.viewport}
           onViewportChange={this.handleViewportChange}
           mapboxApiAccessToken='pk.eyJ1IjoidGF5eWFiZGV2IiwiYSI6ImNrN2M0NW13ODBoMnIzbHFoYmR1Y2ZjdDYifQ.jNx0hMccnFqRtzvck4PLJQ'
           mapStyle='mapbox://styles/tayyabdev/ck7cc1mqe0bwm1is2mhq1k9qe'
           ref={this.mapRef}
+          // onContextMenu={this.handleAddMarker}
           // mapStyle='mapbox://styles/mapbox/light-v10'
         >
-          <Marker latitude={37.78} longitude={-122.41}>
+          <Marker latitude={this.state.viewport.latitude} longitude={this.state.viewport.longitude}>
             <button className="marker-btn">
               <img src="https://clipartart.com/images/google-maps-marker-transparent-clipart.png" alt="Marker"/>
             </button>
           </Marker>
         </ReactMapGL>
+        </div>
       );
   }
 
