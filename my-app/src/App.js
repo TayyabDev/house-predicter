@@ -8,7 +8,10 @@ import MapComponent from './components/Map';
 function App() {
   return (
     <div>
-    	<Home/>
+		<div className="header">
+			<h2 class="text">Household Income Predictor</h2>
+		</div>
+		<Map/>
     </div>
   )
 }

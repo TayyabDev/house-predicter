@@ -3,12 +3,15 @@ import ReactMapGL, {Marker} from 'react-map-gl';
 import "./styles.css"
 // import 'mapbox-gl/dist/mapbox-gl.css';
 import 'react-map-gl-geocoder/dist/mapbox-gl-geocoder.css'
+import {apiPost} from './householdIncomePredictor'
+import {getApiElements} from './householdIncomePredictor'
 var MapboxGeocoder = require('@mapbox/mapbox-gl-geocoder');
-
-
+var mapLocation;
+const hardCode = [7203000, 72, "Puerto Rico", "PR", "Adjuntas Municipio", "Aguadilla", "Adjuntas", "Track", "Track", 603, 787, 6476604, 2717115, 18.4780938, -67.1604529, 0, 0, 0]
 
 
 class MapComponent extends React.Component{
+
   constructor(props){
     super(props)
     this.state = {
@@ -33,10 +36,15 @@ class MapComponent extends React.Component{
   handleSubmit(){
     if(this.state.latitude !== null && this.state.longitude !== null && this.state.latitudeInput !== 0 && this.state.longitude !== 0){
       console.log("updating")
-      this.setState({
-        latitude: this.state.latitudeInput,
-        longitude: this.state.longitudeInput
-      });
+      let pay = getApiElements();
+      const v = '"values":';
+      const payload = pay.slice(0, pay.indexOf(v)) + v + JSON.stringify(hardCode) + "}]}";
+      console.log(payload);
+      const x = apiPost(pay);
+      // this.setState({
+      //   latitude: this.state.latitudeInput,
+      //   longitude: this.state.longitudeInput
+      // });
     }
   }
   
@@ -44,8 +52,10 @@ class MapComponent extends React.Component{
   render(){
     return (
       <div>
-        <Map /> 
-
+        <Map latitude={this.state.latitude} longitude={this.state.longitude}/> 
+        <br></br>
+        <br></br>
+        <input type="submit" onClick={this.handleSubmit} value="Submit" />
       </div>
     );
   }

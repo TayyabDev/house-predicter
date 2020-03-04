@@ -9,6 +9,7 @@
     "@testing-library/react": "^9.4.1",
     "@testing-library/user-event": "^7.2.1",
     "browserify-css": "^0.15.0",
+    "btoa": "^1.2.1",
     "ol": "^6.2.1",
     "openlayers": "^4.6.5",
     "proj4": "^2.6.0",
@@ -17,7 +18,8 @@
     "react-map-gl": "^5.2.3",
     "react-map-gl-geocoder": "^2.0.11",
     "react-router-dom": "^5.1.2",
-    "react-scripts": "3.4.0"
+    "react-scripts": "3.4.0",
+    "xmlhttprequest": "^1.8.0"
   },
   "scripts": {
     "start": "react-scripts start",
