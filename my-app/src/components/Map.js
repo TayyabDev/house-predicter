@@ -44,7 +44,7 @@ class MapComponent extends React.Component{
   render(){
     return (
       <div>
-        <Map latitude={this.state.latitude} longitude={this.state.longitude}/> 
+        <Map /> 
 
       </div>
     );
@@ -60,6 +60,7 @@ class Map extends React.Component {
   constructor(props){
     super(props)
     this.state = {
+      zip: '',
       viewport:  {
         width: 1118,
         height: 478,
@@ -70,6 +71,7 @@ class Map extends React.Component {
       }
       this.mapRef = React.createRef();
       this.handleViewportChange = this.handleViewportChange.bind(this);
+      this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleViewportChange = (viewport) => {
@@ -91,8 +93,27 @@ class Map extends React.Component {
     
   }
 
+  handleSubmit(event){
+    event.preventDefault();
+    fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${this.state.viewport.longitude},${this.state.viewport.latitude}.json?access_token=pk.eyJ1IjoidGF5eWFiZGV2IiwiYSI6ImNrN2M0NW13ODBoMnIzbHFoYmR1Y2ZjdDYifQ.jNx0hMccnFqRtzvck4PLJQ`)
+    .then(response => response.json())
+            .then(data => {
+                this.setState({
+                    zip: data["features"][0]["place_name"]
+                })
+            })
+    console.log(JSON.stringify(this.state.zip))
+            // setTimeout(function(){ alert(this.state); }, 3000);
+  }
+
+  // shouldComponentUpdate(){
+  //   console.log(this.state.chosenZipCode)
+  //   return this.state.chosenZipCode === '' ? true : false;
+  // }
+
+  
+
   render(){
-    console.log("Rendering again: marker : " + this.state.marker )
     return(
         <div>
         <ReactMapGL
@@ -110,6 +131,8 @@ class Map extends React.Component {
             </button>
           </Marker>
         </ReactMapGL>
+        <button onClick={this.handleSubmit}>Submit</button>
+        {this.state.zip!== '' && <h2>{this.state.zip}</h2>}
         </div>
       );
   }
