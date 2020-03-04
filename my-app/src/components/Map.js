@@ -3,6 +3,7 @@ import ReactMapGL, {Marker} from 'react-map-gl';
 import "./styles.css"
 // import 'mapbox-gl/dist/mapbox-gl.css';
 import 'react-map-gl-geocoder/dist/mapbox-gl-geocoder.css'
+var MapboxGeocoder = require('@mapbox/mapbox-gl-geocoder');
 
 
 
@@ -18,7 +19,6 @@ class MapComponent extends React.Component{
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    console.log(typeof this.state.longitude)
   }
 
   handleChange(event){
@@ -61,6 +61,7 @@ class MapComponent extends React.Component{
 
 
 class Map extends React.Component {
+
   constructor(props){
     super(props)
     this.state = {
@@ -72,6 +73,8 @@ class Map extends React.Component {
         zoom: 4
         }
       }
+      this.mapRef = React.createRef();
+
       this.handleViewportChange = this.handleViewportChange.bind(this);
   }
 
@@ -79,6 +82,19 @@ class Map extends React.Component {
     this.setState({
       viewport: { ...this.state.viewport, ...viewport }
     })
+  }
+
+  componentDidMount(){
+    console.log(this.mapRef); // => log includes getMap() function
+    const map = this.mapRef.current.getMap()
+    map.addControl(
+      new MapboxGeocoder({
+      accessToken: 'pk.eyJ1IjoidGF5eWFiZGV2IiwiYSI6ImNrN2M0NW13ODBoMnIzbHFoYmR1Y2ZjdDYifQ.jNx0hMccnFqRtzvck4PLJQ',
+      mapboxgl: map
+      })
+      );
+      
+      
   }
 
   componentDidUpdate(prevProps) {
@@ -100,6 +116,7 @@ class Map extends React.Component {
           onViewportChange={this.handleViewportChange}
           mapboxApiAccessToken='pk.eyJ1IjoidGF5eWFiZGV2IiwiYSI6ImNrN2M0NW13ODBoMnIzbHFoYmR1Y2ZjdDYifQ.jNx0hMccnFqRtzvck4PLJQ'
           mapStyle='mapbox://styles/tayyabdev/ck7cc1mqe0bwm1is2mhq1k9qe'
+          ref={this.mapRef}
           // mapStyle='mapbox://styles/mapbox/light-v10'
         >
           <Marker latitude={37.78} longitude={-122.41}>
