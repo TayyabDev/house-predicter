@@ -44,12 +44,6 @@ class MapComponent extends React.Component{
   render(){
     return (
       <div>
-        <form onSubmit={this.handleSubmit}>
-          <input type="number" name="latitudeInput" value={this.state.latitudeInput} placeholder="Latitude" onChange={this.handleChange}/>
-          <input type="number" name="longitudeInput" value={this.state.longitudeInput} placeholder="Longitude" onChange={this.handleChange}/>
-          <br></br>
-          <button type="submit">Submit</button>
-        </form>
         <Map latitude={this.state.latitude} longitude={this.state.longitude}/> 
       </div>
     );

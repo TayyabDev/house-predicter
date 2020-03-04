@@ -9,9 +9,6 @@ function App() {
   return (
     <div>
     	<Home/>
-    	<div class="map">
-    		<MapComponent />
-    	</div>
     </div>
   )
 }
